@@ -24,4 +24,24 @@ def test_login_success_with_valid_account():
     time.sleep(10)
     driver.quit()
 
-test_login_success_with_valid_account()
+
+def test_login_fail_with_invalid_account():
+    driver.get("https://phongtro123.com/dang-nhap-tai-khoan")
+    driver.find_element_by_id("inputPhoneEmailLogin").send_keys("0983058004") 
+    driver.find_element_by_id("password").send_keys("Abc123!@#$")    
+    driver.find_element_by_class_name("btn-submit").submit()   
+
+    login_success_url = "https://phongtro123.com/"
+
+    if driver.current_url != login_success_url:
+        print("PASS")
+    else:
+        print("FAIL")
+
+    time.sleep(10)
+    driver.quit()
+
+
+
+# test_login_success_with_valid_account()
+test_login_fail_with_invalid_account()
