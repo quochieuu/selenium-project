@@ -1,4 +1,3 @@
-from email import message
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -91,6 +90,6 @@ def test_register_fail_with_used_phone_number():
 
 
 # test_register_success_with_valid_account()
-# test_register_fail_with_invalid_phone_number()
+test_register_fail_with_invalid_phone_number()
 # test_register_fail_with_invalid_password()
-test_register_fail_with_used_phone_number()
+# test_register_fail_with_used_phone_number()
