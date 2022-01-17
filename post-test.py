@@ -144,6 +144,74 @@ def test_create_new_post_fail_with_short_title():
     time.sleep(10)
     driver.quit()
 
+def test_create_new_post_fail_with_short_description():
+    driver.maximize_window()
+    driver.get("https://phongtro123.com/dang-nhap-tai-khoan")
+    driver.find_element_by_id("inputPhoneEmailLogin").send_keys("0983058005") 
+    driver.find_element_by_id("password").send_keys("Abc123!@#")    
+    driver.find_element_by_class_name("btn-submit").submit()   
+
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.title_contains("Phongtro123.com - Kênh thông tin Phòng Trọ số 1 Việt Nam"))
+
+    driver.get("https://phongtro123.com/quan-ly/dang-tin-moi.html")
+
+    # Choose province 
+    driver.find_element_by_id("select2-province_id-container").click()
+    type_input_select = '//li[contains(text(),"Đà Nẵng")]'
+    driver.find_element_by_xpath(type_input_select).click()
+
+    time.sleep(3)
+
+    # Choose district 
+    driver.find_element_by_id("select2-district_id-container").click()
+    type_input_select_district = '//li[contains(text(),"Quận Hải Châu")]'
+    driver.find_element_by_xpath(type_input_select_district).click()
+
+    time.sleep(4)
+
+    # Choose phuongxa
+    driver.find_element_by_id("select2-phuongxa-container").click()
+    type_input_select_px = '//li[contains(text(),"Phường Hòa Cường Nam")]'
+    driver.find_element_by_xpath(type_input_select_px).click()
+
+    time.sleep(3)
+
+    # Choose duong
+    driver.find_element_by_id("select2-duong-container").click()
+    type_input_select_duong = '//li[contains(text(),"Núi Thành")]'
+    driver.find_element_by_xpath(type_input_select_duong).click()
+
+    time.sleep(3)
+
+    driver.find_element_by_id("street_number").send_keys("33 Xo Viet") 
+
+    # Choose danhmuc
+    driver.find_element_by_id("post_cat").send_keys("Phòng trọ, nhà trọ") 
+
+    time.sleep(3)
+
+    driver.find_element_by_id("post_title").send_keys("tieu de " + str(random()))
+
+    driver.find_element_by_id("post_content").send_keys("mo ta...")
+
+    driver.find_element_by_id("giachothue").send_keys("2500000")
+
+    post_title_error = driver.find_element_by_id("post_content-error").text
+
+    driver.find_element_by_id("post_acreage").send_keys("50")
+
+    # driver.find_element_by_class_name("js-btn-hoan-tat").submit()
+
+    if post_title_error == "Nội dung tối thiểu 100 kí tự":
+        print("PASS")
+    else:
+        print("FAIL")
+
+    time.sleep(10)
+    driver.quit()
+
 
 #test_create_new_post_successful()
-test_create_new_post_fail_with_short_title()
+# test_create_new_post_fail_with_short_title()
+test_create_new_post_fail_with_short_description()
